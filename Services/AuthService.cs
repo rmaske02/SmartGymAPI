@@ -35,7 +35,7 @@ namespace SmartGymAPI.Services
                 Name = registerDTO.Name,
                 Email = registerDTO.Email,
                 PasswordHash = PasswordHelper.HashPassword(registerDTO.Password),
-                Role = "User"
+                Role = string.IsNullOrEmpty(registerDTO.Role)?"User":registerDTO.Role,
             };
 
             _context.Users.Add(user);

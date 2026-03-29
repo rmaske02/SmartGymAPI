@@ -32,5 +32,34 @@ namespace SmartGymAPI.Controllers
         [HttpGet("secure-data")] 
         public IActionResult GetSecureData() 
         { return Ok("This is protected data"); }
+
+        [Authorize(Roles ="Admin")]
+        [HttpGet("Admin-only")]
+        public IActionResult AdminOnly()
+        {
+            return Ok("Welcome Admin!");
+        }
+
+        [Authorize(Roles ="Trainer")]
+        [HttpGet("trainer-only")]
+        public IActionResult TrainerOnly()
+        {
+            return Ok("Welcome Trainer!");
+        }
+
+        [Authorize(Roles ="User")]
+        [HttpGet("user-only")]
+        public IActionResult UserOnly()
+        {
+            return Ok("Welcome User!");
+        }
+
+        //Multiple Users!
+        [Authorize(Roles ="Admin,Trainer")]
+        [HttpGet("admin-trainer")]
+        public IActionResult AdminTrainer()
+        {
+            return Ok("Admin or Trainer can access this");
+        }
     }
 }
