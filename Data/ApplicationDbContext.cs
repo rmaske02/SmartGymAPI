@@ -13,5 +13,7 @@ namespace SmartGymAPI.Data
         public DbSet<Role> Roles { get; set; }
         public DbSet<Trainer>Trainers { get; set; }
         public DbSet<Booking>Bookings { get; set; }
+        public DbSet<MembershipPlan>MembershipPlans { get; set; }
+        public DbSet<Subscription>Subscriptions { get; set; }
     }
 }
