@@ -8,9 +8,11 @@ namespace SmartGymAPI.Services
     public class BookingService:IBookingService
     {
         private readonly ApplicationDbContext _context;
-        public BookingService(ApplicationDbContext context)
+        private readonly INotificationService _notificationService;
+        public BookingService(ApplicationDbContext context, INotificationService notificationService)
         {
             _context = context;
+            _notificationService = notificationService;
         }
 
         public async Task<string> CreateBooking(BookingDTO bookingDTO)
@@ -44,6 +46,7 @@ namespace SmartGymAPI.Services
             };
             _context.Bookings.Add(booking);
             await _context.SaveChangesAsync();
+            await _notificationService.AddNotification(bookingDTO.UserId, "Your Session is booked successfully");
             return "Booking Successful";
         }
     }

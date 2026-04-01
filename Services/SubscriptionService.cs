@@ -8,9 +8,11 @@ namespace SmartGymAPI.Services
     public class SubscriptionService:ISubscriptionService
     {
         private readonly ApplicationDbContext _context;
-        public SubscriptionService(ApplicationDbContext context)
+        private readonly INotificationService _notificationService;
+        public SubscriptionService(ApplicationDbContext context, INotificationService notificationService)
         {
             _context = context;
+            _notificationService = notificationService;
         }
 
         public async Task<string> Subscribe(SubscribeDTO subscribeDTO)
@@ -44,6 +46,7 @@ namespace SmartGymAPI.Services
             };
             _context.Subscriptions.Add(subscription);
             await _context.SaveChangesAsync();
+            await _notificationService.AddNotification(subscribeDTO.UserId, "Your Subscription is activated");
             return "Subscription Successful";
         }
     }

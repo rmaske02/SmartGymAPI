@@ -15,5 +15,6 @@ namespace SmartGymAPI.Data
         public DbSet<Booking>Bookings { get; set; }
         public DbSet<MembershipPlan>MembershipPlans { get; set; }
         public DbSet<Subscription>Subscriptions { get; set; }
+        public DbSet<Notification>Notifications { get; set; }
     }
 }
