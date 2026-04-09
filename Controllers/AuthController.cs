@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SmartGymAPI.Data;
 using SmartGymAPI.DTOs;
+using SmartGymAPI.Helpers;
 using SmartGymAPI.Services;
 
 namespace SmartGymAPI.Controllers
@@ -26,7 +27,12 @@ namespace SmartGymAPI.Controllers
         public async Task<IActionResult> Login(LoginDTO loginDTO)
         {
             var token = await _service.Login(loginDTO);
-            return Ok(token);
+            return Ok(new ApiResponse<string>
+            {
+                Success = true,
+                Message = "Login successful",
+                Data = token
+            });
         }
         [Authorize]
         [HttpGet("secure-data")] 

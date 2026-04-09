@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SmartGymAPI.Helpers;
 using SmartGymAPI.Services;
 
 namespace SmartGymAPI.Controllers
@@ -17,7 +18,12 @@ namespace SmartGymAPI.Controllers
         public async Task<IActionResult>GetDashboard()
         {
             var stats = await _dashboardService.GetStats();
-            return Ok(stats);
+            return Ok(new ApiResponse<object>
+            {
+                Success = true,
+                Message = "Dashboard data fetched",
+                Data = stats
+            });
         }
     }
 }
